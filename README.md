@@ -6,7 +6,7 @@ Tiny wrapper for window.postMessage()
 ## API Reference
 
 
-### **PostMessenger()**
+### *PostMessenger()*
 
 #### Syntax
 
@@ -29,7 +29,7 @@ new PostMessenger([params])
 ...
 
 
-### PostMessenger.prototype.**off()**
+### PostMessenger.prototype.*off()*
 
 #### Syntax
 
@@ -52,7 +52,7 @@ messenger.off(name, handler)
 ...
 
 
-### PostMessenger.prototype.**on()**
+### PostMessenger.prototype.*on()*
 
 #### Syntax
 
@@ -75,7 +75,7 @@ messenger.on(name, handler)
 ...
 
 
-### PostMessenger.prototype.**post()**
+### PostMessenger.prototype.*post()*
 
 #### Syntax
 
