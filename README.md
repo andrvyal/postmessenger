@@ -64,17 +64,19 @@ messenger.on(name, handler)
 
 `name`
 
-`handler` A function that receives message event data.
+`handler` A function that receives message event object.
 
-`event.data`
+An event object contains the following properties:
 
-`event.lastEventId`
+`event.data` The data passed from the message emitter.
 
-`event.origin`
+`event.lastEventId` A DOMString representing a unique ID for the event. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
-`event.ports`
+`event.origin` A USVString representing the origin of the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
-`event.source`
+`event.ports` An array of MessagePort objects representing the ports associated with the channel the message is being sent through (where appropriate, e.g. in channel messaging or when sending a message to a shared worker). ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
+
+`event.source` A MessageEventSource (which can be a WindowProxy, MessagePort, or ServiceWorker object) representing the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
 #### Description
 
