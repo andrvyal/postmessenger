@@ -64,7 +64,17 @@ messenger.on(name, handler)
 
 `name`
 
-`handler`
+`handler` A function that receives message event data.
+
+`event.data`
+
+`event.lastEventId`
+
+`event.origin`
+
+`event.ports`
+
+`event.source`
 
 #### Description
 
