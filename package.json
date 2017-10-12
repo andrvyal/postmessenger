@@ -1,4 +1,7 @@
 {
+  "bugs": {
+    "url": "https://github.com/andrvyal/postmessenger/issues"
+  },
   "description": "Tiny wrapper for window.postMessage()",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -8,6 +11,10 @@
   },
   "license": "MIT",
   "name": "postmessenger",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrvyal/postmessenger.git"
+  },
   "scripts": {
     "build": "webpack",
     "build-watch": "webpack --env.watch",
