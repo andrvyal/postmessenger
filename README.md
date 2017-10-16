@@ -18,6 +18,8 @@ var messenger = new PostMessenger(params);
 
 ##### Parameters
 
+`params` Optional parameter. It is an object that contains the following properties:
+
 `params.channel` Optional parameter. Channel is a kind of a filter: messenger sends messages with the channel specified and receives messages with the same channel only. Default channel is `"default"`.
 
 `params.origin` Optional parameter. Specifies an origin that should match the URL of the target window. Default origin is `"*"`.
@@ -73,13 +75,13 @@ messenger.off(name, handler);
 ##### Remove message handler
 
 ```js
-var testHandler = function(event) {
+var messageHandler = function(event) {
   // handler body
 };
 
-messenger.on('testMessage', testHandler);
+messenger.on('testMessage', messageHandler);
 // ...
-messenger.off('testMessage', testHandler);
+messenger.off('testMessage', messageHandler);
 ```
 
 
@@ -98,6 +100,12 @@ messenger.on(name, handler);
 `name` Message name.
 
 `handler` Function that receives message event object.
+
+```js
+function messageHandler(event) {
+  // ...
+}
+```
 
 An `event` object contains the following properties:
 
