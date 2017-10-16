@@ -152,7 +152,7 @@ messenger.post(target, name, data);
 
 #### Examples
 
-##### Send simple message from iframe to the opener window
+##### Send simple message from child window to the opener window
 
 ```js
 var messenger = new PostMessenger();
