@@ -134,7 +134,7 @@ messenger.on('testMessage', function(event) {
 
 ### PostMessenger.prototype.***post()***
 
-Posts message to the target window using parameters passed to the constructor.
+Posts message to the target window using the parameters passed to the constructor (or their default values).
 
 #### Syntax
 
