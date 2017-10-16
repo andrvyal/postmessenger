@@ -1,72 +1,105 @@
 # PostMessenger
 
-Tiny wrapper for window.postMessage()
+Tiny wrapper for [window.postMessage()](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
 
 ## API Reference
 
 
-### *PostMessenger()*
+### ***PostMessenger()***
+
+PostMessenger constructor. Creates an instance of PostMessenger class.
 
 #### Syntax
 
 ```js
-new PostMessenger([params])
-````
+var messenger = new PostMessenger(params);
+```
 
 ##### Parameters
 
-`params.channel`
+`params.channel` Optional parameter. Channel is a kind of a filter: messenger sends messages with the channel specified and receives messages with the same channel only. Default channel is `"default"`.
 
-`params.origin`
-
-#### Description
-
-...
+`params.origin` Optional parameter. Specifies an origin that should match the URL of the target window. Default origin is `"*"`.
 
 #### Examples
 
-...
+##### Create simple messenger
+
+```js
+var messenger = new PostMessenger();
+messenger.on('testMessage', function(event) {
+  // ...
+});
+```
+
+##### Handle different message types
+
+```js
+var contactMessenger = new PostMessenger({
+  channel: 'contacts'
+});
+contactMessenger.on('friendRequest', function(event) {
+  // ...
+});
+
+var chatMessenger = new PostMessenger({
+  channel: 'chats'
+});
+chatMessenger.on('message', function(event) {
+  // ...
+});
+```
 
 
-### PostMessenger.prototype.*off()*
+### PostMessenger.prototype.***off()***
+
+Removes handler from the list of message handlers.
 
 #### Syntax
 
 ```js
-messenger.off(name, handler)
-````
+messenger.off(name, handler);
+```
 
 ##### Parameters
 
-`name`
+`name` Message name.
 
-`handler`
-
-#### Description
-
-...
+`handler` Original message handler function.
 
 #### Examples
 
-...
+##### Remove message handler
+
+```js
+var testHandler = function(event) {
+  // handler body
+};
+
+messenger.on('testMessage', testHandler);
+// ...
+messenger.off('testMessage', testHandler);
+```
 
 
-### PostMessenger.prototype.*on()*
+### PostMessenger.prototype.***on()***
+
+Adds handler to the list of message handlers.
 
 #### Syntax
 
 ```js
-messenger.on(name, handler)
-````
+messenger.on(name, handler);
+```
 
 ##### Parameters
 
-`name`
+`name` Message name.
 
-`handler` A function that receives message event object.
+`handler` Function that receives message event object.
 
-An event object contains the following properties:
+An `event` object contains the following properties:
 
 `event.data` The data passed from the message emitter.
 
@@ -78,35 +111,41 @@ An event object contains the following properties:
 
 `event.source` A MessageEventSource (which can be a WindowProxy, MessagePort, or ServiceWorker object) representing the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
-#### Description
-
-...
-
 #### Examples
 
-...
+##### Handle message
+
+```js
+messenger.on('testMessage', function(event) {
+  console.log(event.data); // data transferred to the messenger
+  console.log(event.origin); // "https://example.com"
+  console.log(event.source); // Window object
+});
+```
 
 
-### PostMessenger.prototype.*post()*
+### PostMessenger.prototype.***post()***
+
+Posts message to the target window using parameters passed to the constructor.
 
 #### Syntax
 
 ```js
-messenger.post(target, name, data)
-````
+messenger.post(target, name, data);
+```
 
 ##### Parameters
 
-`target`
+`target` Target window.
 
-`name`
+`name` Message name.
 
-`data`
-
-#### Description
-
-...
+`data` Data passing to the target.
 
 #### Examples
 
-...
+##### Send message from iframe to the parent window
+
+```js
+messenger.post(window.parent, 'testMessage', 'test data');
+```
