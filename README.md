@@ -152,8 +152,21 @@ messenger.post(target, name, data);
 
 #### Examples
 
+##### Send simple message from iframe to the opener window
+
+```js
+var messenger = new PostMessenger();
+messenger.post(window.opener, 'testMessage', 'test data');
+```
+
 ##### Send message from iframe to the parent window
 
 ```js
-messenger.post(window.parent, 'testMessage', 'test data');
+var chatMessenger = new PostMessenger({
+  channel: 'chats'
+});
+chatMessenger.post(window.parent, 'message', {
+  text: 'Hello world!',
+  timestamp: Date.now()
+});
 ```
