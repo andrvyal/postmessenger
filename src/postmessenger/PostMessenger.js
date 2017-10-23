@@ -1,4 +1,4 @@
-import EventObject from './EventObject';
+import EventObject from 'tinyutils/src/EventObject';
 
 const DEFAULT_CHANNEL = 'default';
 const ORIGIN_ALL = '*';
