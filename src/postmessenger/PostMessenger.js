@@ -1,4 +1,4 @@
-import EventObject from './EventObject';
+import EventObject from 'tinyutils/src/EventObject';
 
 const DEFAULT_CHANNEL = 'default';
 const ORIGIN_ALL = '*';
@@ -17,7 +17,13 @@ export default class PostMessenger {
         origin.length &&
         (origin === ORIGIN_ALL || origin.indexOf(event.origin) >= 0)
       ) {
-        eventObject.trigger(message.name, message.data);
+        eventObject.trigger(message.name, {
+          data: message.data,
+          lastEventId: event.lastEventId,
+          origin: event.origin,
+          ports: event.ports,
+          source: event.source
+        });
       }
     });
 
@@ -31,13 +37,13 @@ export default class PostMessenger {
   off(name, handler) {
     let {eventObject} = PRIVATE.get(this);
 
-    return eventObject.off(name, handler);
+    eventObject.off(name, handler);
   }
 
   on(name, handler) {
     let {eventObject} = PRIVATE.get(this);
 
-    return eventObject.on(name, handler);
+    eventObject.on(name, handler);
   }
 
   post(target, name, data) {
