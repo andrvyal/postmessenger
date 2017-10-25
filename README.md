@@ -20,9 +20,73 @@ npm install andrvyal/postmessenger
 
 ## Examples
 
-[Demo 1 (simple)](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
+### Parent window -> Iframe
 
-[Demo 2 (advanced)](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
+[Plunker](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
+
+Parent window
+
+```js
+var messenger = new PostMessenger();
+messenger.post(iframe.contentWindow, 'message', 'parent window -> iframe');
+```
+
+Iframe
+
+```js
+var messenger = new PostMessenger();
+messenger.on('message', function(event) {
+  comsole.log(event.data); // parent window -> iframe
+});
+```
+
+### Parent window <-> Iframe and Parent window <-> Child window
+
+[Plunker](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
+
+Parent window
+
+```js
+var iframeMessenger = new PostMessenger({
+  channel: 'iframe'
+});
+iframeMessenger.on('confirm', function(event) {
+  comsole.log(event.data); // iframe -> parent window
+});
+iframeMessenger.post(iframe.contentWindow, 'message', 'parent window -> iframe');
+
+var childMessenger = new PostMessenger({
+  channel: 'child'
+});
+childMessenger.on('confirm', function(event) {
+  comsole.log(event.data); // child window -> parent window
+});
+childMessenger.post(childWindow, 'message', 'parent window -> child window');
+```
+
+Iframe
+
+```js
+var messenger = new PostMessenger({
+  channel: 'iframe'
+});
+messenger.on('message', function(event) {
+  comsole.log(event.data); // parent window -> iframe
+  messenger.post(event.source, 'confirm', 'iframe -> parent window');
+});
+```
+
+Child window
+
+```js
+var messenger = new PostMessenger({
+  channel: 'child'
+});
+messenger.on('message', function(event) {
+  comsole.log(event.data); // parent window -> child window
+  messenger.post(event.source, 'confirm', 'child window -> parent window');
+});
+```
 
 
 ## API Reference
