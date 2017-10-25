@@ -18,11 +18,11 @@ npm install andrvyal/postmessenger
 ```
 
 
-## Examples
+## Usage
 
-### Parent window -> Iframe
+### Parent window -> Iframe example
 
-[Plunker](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
+[Plunker demo](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
 
 Parent window
 
@@ -40,9 +40,9 @@ messenger.on('message', function(event) {
 });
 ```
 
-### Parent window <-> Iframe and Parent window <-> Child window
+### Parent window <-> Iframe and Parent window <-> Child window example
 
-[Plunker](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
+[Plunker demo](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
 
 Parent window
 
