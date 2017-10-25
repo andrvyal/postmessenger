@@ -27,10 +27,13 @@ npm install andrvyal/postmessenger
 
 ## API Reference
 
-[***PostMessenger()***](postmessenger)
-[PostMessenger.prototype.***off()***](postmessenger-prototype-off)
-[PostMessenger.prototype.***on()***](postmessenger-prototype-on)
-[PostMessenger.prototype.***post()***](postmessenger-prototype-post)
+[PostMessenger()](#postmessenger-1)
+
+[PostMessenger.prototype.off()](#postmessengerprototypeoff)
+
+[PostMessenger.prototype.on()](#postmessengerprototypeon)
+
+[PostMessenger.prototype.post()](#postmessengerprototypepost)
 
 
 ### ***PostMessenger()***
