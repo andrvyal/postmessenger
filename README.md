@@ -3,6 +3,28 @@
 Tiny wrapper for [window.postMessage()](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
 
+## Install
+
+### NPM
+
+```shell
+npm install https://github.com/andrvyal/postmessenger.git
+```
+
+or just
+
+```shell
+npm install andrvyal/postmessenger
+```
+
+
+## Examples
+
+[Demo 1 (simple)](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
+
+[Demo 2 (advanced)](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
+
+
 ## API Reference
 
 
