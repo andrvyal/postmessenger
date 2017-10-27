@@ -109,11 +109,11 @@ var messenger = new PostMessenger(params);
 
 ##### Parameters
 
-`params` Optional parameter. It is an object that contains the following properties:
+`params` {object} - Optional parameter. It is an object that contains the following properties:
 
-`params.channel` Optional parameter. Channel is a kind of a filter: messenger sends messages with the channel specified and receives messages with the same channel only. Default channel is `"default"`.
+`params.channel` {any} - Optional parameter. Channel is a kind of a filter: messenger sends messages with the channel specified and receives messages with the same channel only. Default channel is `"default"`.
 
-`params.origin` Optional parameter. Specifies an origin that should match the URL of the target window. Default origin is `"*"`.
+`params.origin` {string} - Optional parameter. Specifies an origin that should match the URL of the target window. Default origin is `"*"`.
 
 #### Examples
 
@@ -157,9 +157,9 @@ messenger.off(name, handler);
 
 ##### Parameters
 
-`name` Message name.
+`name` {string} - Message name.
 
-`handler` Original message handler function.
+`handler` {function} - Original message handler function.
 
 #### Examples
 
@@ -188,9 +188,9 @@ messenger.on(name, handler);
 
 ##### Parameters
 
-`name` Message name.
+`name` {string} - Message name.
 
-`handler` Function that receives message event object.
+`handler` {function} - Function that receives message event object.
 
 ```js
 function messageHandler(event) {
@@ -198,17 +198,17 @@ function messageHandler(event) {
 }
 ```
 
-An `event` object contains the following properties:
+An `event` {object} - object contains the following properties:
 
-`event.data` The data passed from the message emitter.
+`event.data` {any} - The data passed from the message emitter.
 
-`event.lastEventId` A DOMString representing a unique ID for the event. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
+`event.lastEventId` {string} - A DOMString representing a unique ID for the event. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
-`event.origin` A USVString representing the origin of the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
+`event.origin` {string} - A USVString representing the origin of the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
-`event.ports` An array of MessagePort objects representing the ports associated with the channel the message is being sent through (where appropriate, e.g. in channel messaging or when sending a message to a shared worker). ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
+`event.ports` {object} - An array of MessagePort objects representing the ports associated with the channel the message is being sent through (where appropriate, e.g. in channel messaging or when sending a message to a shared worker). ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
-`event.source` A MessageEventSource (which can be a WindowProxy, MessagePort, or ServiceWorker object) representing the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
+`event.source` {object} - A MessageEventSource (which can be a WindowProxy, MessagePort, or ServiceWorker object) representing the message emitter. ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent))
 
 #### Examples
 
@@ -235,11 +235,11 @@ messenger.post(target, name, data);
 
 ##### Parameters
 
-`target` Target window.
+`target` {object} - Target window.
 
-`name` Message name.
+`name` {string} - Message name.
 
-`data` Data passing to the target.
+`data` {any} - Data passing to the target.
 
 #### Examples
 
