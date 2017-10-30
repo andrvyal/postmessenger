@@ -18,9 +18,9 @@ npm install andrvyal/postmessenger
 ```
 
 
-## Usage
+## Examples
 
-### Parent window -> Iframe example
+### Parent window -> Iframe
 
 [Plunker demo](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
 
@@ -36,11 +36,11 @@ Iframe
 ```js
 var messenger = new PostMessenger();
 messenger.on('message', function(event) {
-  comsole.log(event.data); // parent window -> iframe
+  console.log(event.data); // parent window -> iframe
 });
 ```
 
-### Parent window <-> Iframe and Parent window <-> Child window example
+### Parent window <-> Iframe and Parent window <-> Child window
 
 [Plunker demo](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
 
@@ -51,7 +51,7 @@ var iframeMessenger = new PostMessenger({
   channel: 'iframe'
 });
 iframeMessenger.on('confirm', function(event) {
-  comsole.log(event.data); // iframe -> parent window
+  console.log(event.data); // iframe -> parent window
 });
 iframeMessenger.post(iframe.contentWindow, 'message', 'parent window -> iframe');
 
@@ -59,7 +59,7 @@ var childMessenger = new PostMessenger({
   channel: 'child'
 });
 childMessenger.on('confirm', function(event) {
-  comsole.log(event.data); // child window -> parent window
+  console.log(event.data); // child window -> parent window
 });
 childMessenger.post(childWindow, 'message', 'parent window -> child window');
 ```
@@ -71,7 +71,7 @@ var messenger = new PostMessenger({
   channel: 'iframe'
 });
 messenger.on('message', function(event) {
-  comsole.log(event.data); // parent window -> iframe
+  console.log(event.data); // parent window -> iframe
   messenger.post(event.source, 'confirm', 'iframe -> parent window');
 });
 ```
@@ -83,7 +83,7 @@ var messenger = new PostMessenger({
   channel: 'child'
 });
 messenger.on('message', function(event) {
-  comsole.log(event.data); // parent window -> child window
+  console.log(event.data); // parent window -> child window
   messenger.post(event.source, 'confirm', 'child window -> parent window');
 });
 ```
@@ -243,7 +243,7 @@ messenger.post(target, name, data);
 
 #### Examples
 
-##### Send simple message from child window to the opener window
+##### Send simple message from child window to the parent window
 
 ```js
 var messenger = new PostMessenger();
