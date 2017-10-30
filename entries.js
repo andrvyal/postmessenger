@@ -1,3 +1,3 @@
 module.exports = {
-  postmessenger: './postmessenger.js'
+  'dist/postmessenger': './src/postmessenger.js'
 };

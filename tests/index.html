@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="dist/mocha.css">
+
+  <style>
+    #iframe {
+      display: none;
+    }
+
+    #start {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <button id="start" type="button">Click to start</button>
+  <iframe id="iframe" src="iframe.html"></iframe>
+  <div id="mocha"></div>
+
+  <script src="dist/mocha.js"></script>
+  <script src="dist/index.js"></script>
+</body>
+</html>
