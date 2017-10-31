@@ -1,4 +1,3 @@
-const entries = require('./entries');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -6,7 +5,9 @@ module.exports = (env = {}) => {
   return {
     context: path.resolve(__dirname),
     devtool: 'source-map',
-    entry: entries,
+    entry: {
+      'dist/postmessenger.js': './src/postmessenger.js'
+    },
     module: {
       loaders: [
         {
