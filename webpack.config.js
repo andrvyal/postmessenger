@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = (env = {}) => {
   return {
-    context: path.resolve(__dirname, 'src'),
+    context: path.resolve(__dirname),
     devtool: 'source-map',
     entry: entries,
     module: {
@@ -23,7 +23,7 @@ module.exports = (env = {}) => {
       ]
     },
     output: {
-      filename: "[name].js",
+      filename: "[name]",
       path: path.resolve(__dirname)
     },
     plugins: [
