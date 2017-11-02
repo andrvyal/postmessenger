@@ -10,6 +10,11 @@
     "webpack": "^3.6.0"
   },
   "description": "Tiny wrapper for window.postMessage()",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "copy-webpack-plugin": "^4.2.0",
+    "mocha": "^4.0.1"
+  },
   "license": "MIT",
   "main": "dist/postmessenger.js",
   "name": "postmessenger",
@@ -20,10 +25,10 @@
   "scripts": {
     "build": "webpack",
     "build-watch": "webpack --env.watch",
-    "dev": "webpack --config webpack-dev.config.js",
-    "dev-watch": "webpack --config webpack-dev.config.js --env.watch",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "tests": "webpack --config webpack-tests.config.js",
+    "tests-watch": "webpack --config webpack-tests.config.js --env.watch"
   },
   "title": "PostMessenger",
-  "version": "0.2.2"
+  "version": "0.2.3"
 }

@@ -1,12 +1,13 @@
-const entries = require('./entries');
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = (env = {}) => {
   return {
-    context: path.resolve(__dirname, 'src'),
+    context: path.resolve(__dirname),
     devtool: 'source-map',
-    entry: entries,
+    entry: {
+      'dist/postmessenger.js': './src/postmessenger.js'
+    },
     module: {
       loaders: [
         {
@@ -23,8 +24,8 @@ module.exports = (env = {}) => {
       ]
     },
     output: {
-      filename: "[name].js",
-      path: path.resolve(__dirname, 'dist')
+      filename: "[name]",
+      path: path.resolve(__dirname)
     },
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
