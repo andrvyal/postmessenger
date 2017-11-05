@@ -1,19 +1,24 @@
 import EventObject from 'tinyutils/src/EventObject';
+import Filter from './Filter';
 
-const DEFAULT_CHANNEL = 'default';
 const ORIGIN_ALL = '*';
 const PRIVATE = new WeakMap();
 
 export default class PostMessenger {
-  constructor({channel = DEFAULT_CHANNEL, origin = ORIGIN_ALL} = {}) {
+  constructor({filter, origin = ORIGIN_ALL} = {}) {
     let eventObject = new EventObject();
+
+    if (filter && typeof filter === 'object') {
+      filter = Object.freeze(filter);
+    }
+    let filterMatcher = Filter.getMatcher(filter);
 
     window.addEventListener('message', (event) => {
       let message = event.data;
 
       if (
         message &&
-        message.channel === channel &&
+        filterMatcher(message.filter) &&
         origin.length &&
         (origin === ORIGIN_ALL || origin.indexOf(event.origin) >= 0)
       ) {
@@ -28,8 +33,8 @@ export default class PostMessenger {
     });
 
     PRIVATE.set(this, {
-      channel,
       eventObject,
+      filter,
       origin
     });
   }
@@ -47,11 +52,11 @@ export default class PostMessenger {
   }
 
   post(target, name, data) {
-    let {channel, origin} = PRIVATE.get(this);
+    let {filter, origin} = PRIVATE.get(this);
 
     target.postMessage({
-      channel,
       data,
+      filter,
       name
     }, origin);
   }
