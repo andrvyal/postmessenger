@@ -1,13 +1,20 @@
 import PostMessenger from '../../src/postmessenger/PostMessenger';
 
-let initEcho = (messenger) => {
+let initAutoreply = (messenger, message, reply) => {
   messenger.on('message', (event) => {
-    messenger.post(event.source, 'echo', event.data);
+    messenger.post(event.source, message, reply);
   });
 };
 
-initEcho(new PostMessenger());
+initAutoreply(new PostMessenger(), 'child_autoreply', 'child_nofilter');
 
-initEcho(new PostMessenger({
-  channel: 'child'
-}));
+initAutoreply(new PostMessenger({
+  filter: 'child'
+}), 'autoreply', 'child_plain_filter');
+
+initAutoreply(new PostMessenger({
+  filter: {
+    session: 'testing',
+    control: 'child'
+  }
+}), 'autoreply', 'child_complex_filter');
