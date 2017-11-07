@@ -22,7 +22,7 @@ npm install andrvyal/postmessenger
 
 ### Parent window -> Iframe
 
-[Plunker demo](https://plnkr.co/edit/0ReoQFHeYTTAQItOIJ6f?p=preview)
+[Plunker demo](https://plnkr.co/edit/7RvHxM2R6LFV78vhvkTk?p=preview)
 
 Parent window
 
@@ -42,7 +42,7 @@ messenger.on('testMessage', function(event) {
 
 ### Parent window <-> Iframe and Parent window <-> Child window
 
-[Plunker demo](https://plnkr.co/edit/q6dMLKuotnV5lgyF2ebo?p=preview)
+[Plunker demo](https://plnkr.co/edit/fm2c3ZAzZ4G1M5B8a1Q8?p=preview)
 
 Parent window
 
