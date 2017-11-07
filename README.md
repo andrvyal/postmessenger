@@ -48,7 +48,7 @@ Parent window
 
 ```js
 var iframeMessenger = new PostMessenger({
-  channel: 'iframe'
+  filter: 'iframe'
 });
 iframeMessenger.on('confirm', function(event) {
   console.log(event.data); // iframe -> parent window
@@ -56,7 +56,7 @@ iframeMessenger.on('confirm', function(event) {
 iframeMessenger.post(iframe.contentWindow, 'message', 'parent window -> iframe');
 
 var childMessenger = new PostMessenger({
-  channel: 'child'
+  filter: 'child'
 });
 childMessenger.on('confirm', function(event) {
   console.log(event.data); // child window -> parent window
@@ -68,7 +68,7 @@ Iframe
 
 ```js
 var messenger = new PostMessenger({
-  channel: 'iframe'
+  filter: 'iframe'
 });
 messenger.on('message', function(event) {
   console.log(event.data); // parent window -> iframe
@@ -80,7 +80,7 @@ Child window
 
 ```js
 var messenger = new PostMessenger({
-  channel: 'child'
+  filter: 'child'
 });
 messenger.on('message', function(event) {
   console.log(event.data); // parent window -> child window
@@ -111,37 +111,120 @@ var messenger = new PostMessenger(params);
 
 `params` {object} - Optional parameter. It is an object that contains the following properties:
 
-`params.channel` {any} - Optional parameter. Channel is a kind of a filter: messenger sends messages with the channel specified and receives messages with the same channel only. Default channel is `"default"`.
+`params.filter` {any} - Optional parameter. Messenger sends messages with the filter specified and receives messages with the same filter only. It receives messages with empty filter only if the filter is not specified. Could be plain (primitive value, such as string or number) or complex (object). All fields of the complex filter should match the fields of received messages.
 
 `params.origin` {string} - Optional parameter. Specifies an origin that should match the URL of the target window. Default origin is `"*"`.
 
 #### Examples
 
-##### Create simple messenger
+##### Simple messenger
+
+Parent window
 
 ```js
 var messenger = new PostMessenger();
-messenger.on('testMessage', function(event) {
-  // ...
+messenger.on('message', function(event) {
+  console.log(event.data); // iframe -> parent window
 });
 ```
 
-##### Handle different message types
+Iframe
+
+```js
+var messenger = new PostMessenger();
+messenger.post(window.parent, 'message', 'iframe -> parent window');
+```
+
+##### Handle different message types using plain filters
+
+Parent window
 
 ```js
 var contactMessenger = new PostMessenger({
-  channel: 'contacts'
+  filter: 'contacts' // application module
 });
 contactMessenger.on('friendRequest', function(event) {
-  // ...
+  console.log(event.data); // contacts iframe -> parent window
 });
 
 var chatMessenger = new PostMessenger({
-  channel: 'chats'
+  filter: 'chats' // application module
 });
 chatMessenger.on('message', function(event) {
-  // ...
+  console.log(event.data); // chats iframe -> parent window
 });
+```
+
+Contacts iframe
+
+```js
+var messenger = new PostMessenger({
+  filter: 'contacts' // application module
+});
+messenger.post(window.parent, 'friendRequest', 'contacts iframe -> parent window');
+```
+
+Chats iframe
+
+```js
+var messenger = new PostMessenger({
+  filter: 'chats' // application module
+});
+messenger.post(window.parent, 'message', 'chats iframe -> parent window');
+```
+
+##### Handle more cases using complex filters
+
+Parent window
+
+```js
+var sessionId = 6713509903954036; // some unique ID for this session
+
+var contactMessenger = new PostMessenger({
+  filter: {
+    session: sessionId,
+    type: 'contacts' // application module
+  }
+});
+contactMessenger.on('friendRequest', function(event) {
+  console.log(event.data); // contacts iframe -> parent window
+});
+
+var chatMessenger = new PostMessenger({
+  filter: {
+    session: sessionId,
+    type: 'chats' // application module
+  }
+});
+chatMessenger.on('message', function(event) {
+  console.log(event.data); // chats iframe -> parent window
+});
+```
+
+Contacts iframe
+
+```js
+var sessionId = 6713509903954036; // some unique ID for this session
+var messenger = new PostMessenger({
+  filter: {
+    session: sessionId,
+    type: 'contacts' // application module
+  }
+});
+messenger.post(window.parent, 'friendRequest', 'contacts iframe -> parent window');
+```
+
+Chats iframe
+
+```js
+var sessionId = 6713509903954036; // some unique ID for this session
+var messenger = new PostMessenger({
+  filter: {
+    session: sessionId,
+    type: 'chats' // application module
+  }
+});
+messenger.post(window.parent, 'message', 'chats iframe -> parent window');
 ```
 
 
@@ -254,7 +337,7 @@ messenger.post(window.opener, 'testMessage', 'test data');
 
 ```js
 var chatMessenger = new PostMessenger({
-  channel: 'chats'
+  filter: 'chats'
 });
 chatMessenger.post(window.parent, 'message', {
   text: 'Hello world!',
