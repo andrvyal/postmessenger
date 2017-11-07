@@ -28,14 +28,14 @@ Parent window
 
 ```js
 var messenger = new PostMessenger();
-messenger.post(iframe.contentWindow, 'message', 'parent window -> iframe');
+messenger.post(iframe.contentWindow, 'testMessage', 'parent window -> iframe');
 ```
 
 Iframe
 
 ```js
 var messenger = new PostMessenger();
-messenger.on('message', function(event) {
+messenger.on('testMessage', function(event) {
   console.log(event.data); // parent window -> iframe
 });
 ```
@@ -53,7 +53,7 @@ var iframeMessenger = new PostMessenger({
 iframeMessenger.on('confirm', function(event) {
   console.log(event.data); // iframe -> parent window
 });
-iframeMessenger.post(iframe.contentWindow, 'message', 'parent window -> iframe');
+iframeMessenger.post(iframe.contentWindow, 'testMessage', 'parent window -> iframe');
 
 var childMessenger = new PostMessenger({
   filter: 'child'
@@ -61,7 +61,7 @@ var childMessenger = new PostMessenger({
 childMessenger.on('confirm', function(event) {
   console.log(event.data); // child window -> parent window
 });
-childMessenger.post(childWindow, 'message', 'parent window -> child window');
+childMessenger.post(childWindow, 'testMessage', 'parent window -> child window');
 ```
 
 Iframe
@@ -70,7 +70,7 @@ Iframe
 var messenger = new PostMessenger({
   filter: 'iframe'
 });
-messenger.on('message', function(event) {
+messenger.on('testMessage', function(event) {
   console.log(event.data); // parent window -> iframe
   messenger.post(event.source, 'confirm', 'iframe -> parent window');
 });
@@ -82,7 +82,7 @@ Child window
 var messenger = new PostMessenger({
   filter: 'child'
 });
-messenger.on('message', function(event) {
+messenger.on('testMessage', function(event) {
   console.log(event.data); // parent window -> child window
   messenger.post(event.source, 'confirm', 'child window -> parent window');
 });
@@ -123,7 +123,7 @@ Parent window
 
 ```js
 var messenger = new PostMessenger();
-messenger.on('message', function(event) {
+messenger.on('testMessage', function(event) {
   console.log(event.data); // iframe -> parent window
 });
 ```
@@ -132,7 +132,7 @@ Iframe
 
 ```js
 var messenger = new PostMessenger();
-messenger.post(window.parent, 'message', 'iframe -> parent window');
+messenger.post(window.parent, 'testMessage', 'iframe -> parent window');
 ```
 
 ##### Handle different message types using plain filters
@@ -143,14 +143,14 @@ Parent window
 var contactMessenger = new PostMessenger({
   filter: 'contacts' // application module
 });
-contactMessenger.on('friendRequest', function(event) {
+contactMessenger.on('testMessage', function(event) {
   console.log(event.data); // contacts iframe -> parent window
 });
 
 var chatMessenger = new PostMessenger({
   filter: 'chats' // application module
 });
-chatMessenger.on('message', function(event) {
+chatMessenger.on('testMessage', function(event) {
   console.log(event.data); // chats iframe -> parent window
 });
 ```
@@ -161,7 +161,7 @@ Contacts iframe
 var messenger = new PostMessenger({
   filter: 'contacts' // application module
 });
-messenger.post(window.parent, 'friendRequest', 'contacts iframe -> parent window');
+messenger.post(window.parent, 'testMessage', 'contacts iframe -> parent window');
 ```
 
 Chats iframe
@@ -170,7 +170,7 @@ Chats iframe
 var messenger = new PostMessenger({
   filter: 'chats' // application module
 });
-messenger.post(window.parent, 'message', 'chats iframe -> parent window');
+messenger.post(window.parent, 'testMessage', 'chats iframe -> parent window');
 ```
 
 ##### Handle more cases using complex filters
@@ -186,7 +186,7 @@ var contactMessenger = new PostMessenger({
     type: 'contacts' // application module
   }
 });
-contactMessenger.on('friendRequest', function(event) {
+contactMessenger.on('testMessage', function(event) {
   console.log(event.data); // contacts iframe -> parent window
 });
 
@@ -196,7 +196,7 @@ var chatMessenger = new PostMessenger({
     type: 'chats' // application module
   }
 });
-chatMessenger.on('message', function(event) {
+chatMessenger.on('testMessage', function(event) {
   console.log(event.data); // chats iframe -> parent window
 });
 ```
@@ -205,26 +205,26 @@ Contacts iframe
 
 ```js
 var sessionId = 6713509903954036; // some unique ID for this session
-var messenger = new PostMessenger({
+var contactMessenger = new PostMessenger({
   filter: {
     session: sessionId,
     type: 'contacts' // application module
   }
 });
-messenger.post(window.parent, 'friendRequest', 'contacts iframe -> parent window');
+contactMessenger.post(window.parent, 'testMessage', 'contacts iframe -> parent window');
 ```
 
 Chats iframe
 
 ```js
 var sessionId = 6713509903954036; // some unique ID for this session
-var messenger = new PostMessenger({
+var chatMessenger = new PostMessenger({
   filter: {
     session: sessionId,
     type: 'chats' // application module
   }
 });
-messenger.post(window.parent, 'message', 'chats iframe -> parent window');
+chatMessenger.post(window.parent, 'testMessage', 'chats iframe -> parent window');
 ```
 
 
@@ -276,7 +276,7 @@ messenger.on(name, handler);
 `handler` {function} - Function that receives message event object.
 
 ```js
-function messageHandler(event) {
+function handler(event) {
   // ...
 }
 ```
@@ -339,7 +339,7 @@ messenger.post(window.opener, 'testMessage', 'test data');
 var chatMessenger = new PostMessenger({
   filter: 'chats'
 });
-chatMessenger.post(window.parent, 'message', {
+chatMessenger.post(window.parent, 'testMessage', {
   text: 'Hello world!',
   timestamp: Date.now()
 });
