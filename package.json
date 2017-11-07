@@ -30,5 +30,5 @@
     "tests-watch": "webpack --config webpack-tests.config.js --env.watch"
   },
   "title": "PostMessenger",
-  "version": "0.2.3"
+  "version": "0.3.0"
 }
