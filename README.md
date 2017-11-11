@@ -40,7 +40,7 @@ messenger.on('testMessage', function(event) {
 });
 ```
 
-### Parent window <-> Iframe and Parent window <-> Child window
+### Parent window <-> Iframe and Parent window <-> Popup
 
 [Plunker demo](https://plnkr.co/edit/fm2c3ZAzZ4G1M5B8a1Q8?p=preview)
 
@@ -55,13 +55,13 @@ iframeMessenger.on('confirm', function(event) {
 });
 iframeMessenger.post(iframe.contentWindow, 'testMessage', 'parent window -> iframe');
 
-var childMessenger = new PostMessenger({
-  filter: 'child'
+var popupMessenger = new PostMessenger({
+  filter: 'popup'
 });
-childMessenger.on('confirm', function(event) {
-  console.log(event.data); // child window -> parent window
+popupMessenger.on('confirm', function(event) {
+  console.log(event.data); // popup -> parent window
 });
-childMessenger.post(childWindow, 'testMessage', 'parent window -> child window');
+popupMessenger.post(popupWindow, 'testMessage', 'parent window -> popup');
 ```
 
 Iframe
@@ -76,15 +76,15 @@ messenger.on('testMessage', function(event) {
 });
 ```
 
-Child window
+Popup
 
 ```js
 var messenger = new PostMessenger({
-  filter: 'child'
+  filter: 'popup'
 });
 messenger.on('testMessage', function(event) {
-  console.log(event.data); // parent window -> child window
-  messenger.post(event.source, 'confirm', 'child window -> parent window');
+  console.log(event.data); // parent window -> popup
+  messenger.post(event.source, 'confirm', 'popup -> parent window');
 });
 ```
 
@@ -326,7 +326,7 @@ messenger.post(target, name, data);
 
 #### Examples
 
-##### Send simple message from child window to the parent window
+##### Send simple message from popup to the parent window
 
 ```js
 var messenger = new PostMessenger();
