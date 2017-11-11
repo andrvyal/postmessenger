@@ -5,9 +5,9 @@ module.exports = (env = {}) => {
   return {
     context: path.resolve(__dirname),
     entry: {
-      'tests/dist/child.js': './tests/src/child.js',
       'tests/dist/iframe.js': './tests/src/iframe.js',
-      'tests/dist/index.js': './tests/src/index.js'
+      'tests/dist/index.js': './tests/src/index.js',
+      'tests/dist/popup.js': './tests/src/popup.js'
     },
     output: {
       filename: "[name]",

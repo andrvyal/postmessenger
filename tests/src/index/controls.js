@@ -5,7 +5,8 @@ let start = document.getElementById('start');
 start.addEventListener('click', () => {
   start.remove();
   controls.iframe = document.getElementById('iframe').contentWindow;
-  controls.child = window.open('child.html');
+  controls.iframe.location.href = 'iframe.html';
+  controls.popup = window.open('popup.html');
 
   mocha.run();
 });
